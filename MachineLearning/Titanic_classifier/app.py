@@ -1,5 +1,6 @@
 import pickle
 import streamlit as st
+import random
 
 # Load the pre-trained model
 try:
@@ -7,9 +8,14 @@ try:
         model = pickle.load(f)
 except FileNotFoundError:
     st.error("Model file not found. Please make sure 'model.pkl' exists in the current directory.")
+    model = None
 
 # Define function for prediction
 def predict(age, fare, sex, pclass, embarked, sibsp, parch):
+    if model is None:
+        st.error("Model is not loaded. Unable to make predictions.")
+        return None
+
     # Preprocess input data (categorical encoding)
     try:
         sex_encoded = {'Male': 1, 'Female': 0}[sex]
@@ -23,6 +29,7 @@ def predict(age, fare, sex, pclass, embarked, sibsp, parch):
         return prediction
     except KeyError:
         st.error("Invalid input values. Please check your input.")
+        return None
 
 # Set app title and header
 st.title('Passenger Survival Prediction App')
@@ -43,9 +50,6 @@ with right_column:
     sibsp = st.number_input('Number of Siblings/Spouses:', min_value=0)
     parch = st.number_input('Number of Parents/Children:', min_value=0)
 
-
-import random
-
 # Define phrases for positive and negative predictions
 positive_phrases = ["You'll live another day", "Fortune smiles upon you", "Survivor in the making"]
 negative_phrases = ["Get ready to sleep in your casket", "Prepare for the worst", "Life's journey ends here"]
@@ -54,10 +58,10 @@ negative_phrases = ["Get ready to sleep in your casket", "Prepare for the worst"
 if st.button('Predict'):
     # Make the prediction
     prediction = predict(age, fare, sex, pclass, embarked, sibsp, parch)
-
-    # Display prediction result
-    if prediction == 1:
-        st.success(random.choice(positive_phrases))
-    else:
-        st.error(random.choice(negative_phrases))
-        
+    
+    if prediction is not None:
+        # Display prediction result
+        if prediction == 1:
+            st.success(random.choice(positive_phrases))
+        else:
+            st.error(random.choice(negative_phrases))
