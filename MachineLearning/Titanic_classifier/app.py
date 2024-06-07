@@ -6,7 +6,9 @@ import random
 try:
     with open('model.pkl', 'rb') as f:
         model = pickle.load(f)
-
+except FileNotFoundError:
+    st.error("Model file not found. Please make sure 'model.pkl' exists in the current directory.")
+    model = None
 
 # Define function for prediction
 def predict(age, fare, sex, pclass, embarked, sibsp, parch):
