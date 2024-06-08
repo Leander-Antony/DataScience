@@ -2,11 +2,11 @@ import pickle
 import streamlit as st
 import random
 
-model_path = r'DataScience\MachineLearning\Titanic_classifier\model.pkl'
+model_path = r'model.pkl'
 
 # Load the pre-trained model
 try:
-    with open(model_path, 'rb') as f:
+    with open('MachineLearning/Titanic_classifier/model.pkl', 'rb') as f:
         model = pickle.load(f)
 except FileNotFoundError:
     st.error(f"Model file not found. Please make sure '{model_path}' exists in the specified directory.")
