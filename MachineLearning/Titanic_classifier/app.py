@@ -6,7 +6,7 @@ model_path = r'model.pkl'
 
 # Load the pre-trained model
 try:
-    with open(model.pkl, 'rb') as f:
+    with open('model.pkl', 'rb') as f:
         model = pickle.load(f)
 except FileNotFoundError:
     st.error(f"Model file not found. Please make sure '{model_path}' exists in the specified directory.")
