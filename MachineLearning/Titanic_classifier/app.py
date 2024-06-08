@@ -2,7 +2,7 @@ import pickle
 import streamlit as st
 import random
 
-model_path = 'model.pkl'
+model_path = r'model.pkl'
 
 # Load the pre-trained model
 try:
