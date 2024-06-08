@@ -2,7 +2,7 @@ import pickle
 import streamlit as st
 import random
 
-model_path = r'C:\Users\Leander Antony\Desktop\_\Git\DataScience\MachineLearning\Titanic_classifier\model.pkl'
+model_path = r'DataScience\MachineLearning\Titanic_classifier\model.pkl'
 
 # Load the pre-trained model
 try:
