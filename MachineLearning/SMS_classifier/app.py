@@ -11,10 +11,10 @@ nltk.download('punkt')
 nltk.download('stopwords')
 
 # Load the SVM model and TF-IDF vectorizer
-with open('MachineLearning/SMS_classifier/model.pkl', 'rb') as f:
+with open('model.pkl', 'rb') as f:
     model = pickle.load(f)
 
-with open('MachineLearning/SMS_classifier/vectorizer.pkl', 'rb') as f:
+with open('vectorizer.pkl', 'rb') as f:
     vectorizer = pickle.load(f)
 
 # Define function to preprocess input text
